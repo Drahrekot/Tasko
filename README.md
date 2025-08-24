@@ -1,49 +1,78 @@
 # ✅ Tasko
 
-**Tasko** is a minimalist task management app designed to help you stay productive without distractions.  
-Lightweight, clean, and focused — just you and your tasks.
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+![Made with Love](https://img.shields.io/badge/Made%20with-%E2%9D%A4-red.svg)
+![Status](https://img.shields.io/badge/Status-Active-success.svg)
+
+**Tasko** is a minimalist task management app built to help you focus on what matters.  
+No clutter, no distractions — just add tasks, complete them, and stay productive.
 
 ---
 
 ## ✨ Features
-- 📝 Add, edit, and delete tasks easily  
+- 📝 Create, edit, and delete tasks effortlessly  
 - ✅ Mark tasks as complete with a single click  
-- 🎯 Minimalist and distraction-free design  
-- 💾 Local storage support (your tasks stay even after closing the app)  
-- 🚀 Fast, lightweight, and easy to use  
-
----
-
-## 📸 Screenshots
-*(Add your screenshots here!)*  
-Example:  
-<img src="assets/screenshot1.png" width="600" alt="Tasko Screenshot">
+- 🎯 Minimal, distraction-free design  
+- 💾 Local persistence (your tasks stay saved)  
+- 🚀 Lightweight and fast  
 
 ---
 
 ## 🛠️ Tech Stack
-- **Frontend:** HTML, CSS, JavaScript  
-- **Backend:** (if any – add your framework here, e.g. Flask, Node.js, .NET, etc.)  
-- **Database/Storage:** Local Storage / SQLite / MongoDB *(choose your actual one)*  
+- **Frontend:** Vite, React, Tailwind CSS  
+- **Backend:** Node.js / Express *(if used in `/server`)*  
+- **Other:** TypeScript, Drizzle ORM  
 
 ---
 
 ## 🚀 Getting Started
 
-### Prerequisites
-- [Node.js](https://nodejs.org/) (if using React/Node backend)  
-- Browser (for client-side only app)
-
-### Installation
+### Clone the repo
 ```bash
-# Clone the repo
-git clone https://github.com/YOUR_USERNAME/tasko.git
+git clone https://github.com/Drahrekot/Tasko.git
+cd Tasko
+```
 
-# Navigate into the folder
-cd tasko
-
-# Install dependencies (if applicable)
+### Install dependencies
+```bash
 npm install
+```
 
-# Run the app
-npm start
+### Run the app
+```bash
+npm run dev
+```
+
+The app will start on [http://localhost:5173](http://localhost:5173).
+
+---
+
+## 📸 Screenshots
+*(Add screenshots of your app UI here to make it look polished!)*  
+Example:  
+<img src="assets/screenshot.png" width="600" alt="Tasko Screenshot">
+
+---
+
+## 🎨 Design Philosophy
+> *“Simplicity is the ultimate sophistication.”*  
+Tasko is built with a focus on **minimalism and clarity** — no clutter, no complexity, just tasks.
+
+---
+
+## 🤝 Contributing
+Contributions are welcome!  
+- Fork the repo  
+- Create a feature branch  
+- Open a PR  
+
+---
+
+## 📜 License
+This project is licensed under the MIT License.  
+
+---
+
+## 👤 Author
+- **Vityuth (@Drahrekot)**  
+  [GitHub](https://github.com/Drahrekot)
