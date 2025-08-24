@@ -1,0 +1,324 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager - Simple & Clean</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ios-blue': '#007AFF',
+                        'success-green': '#34C759',
+                        'ios-bg': '#F2F2F7',
+                        'completed-gray': '#8E8E93',
+                        'ios-white': '#FFFFFF'
+                    },
+                    fontFamily: {
+                        'sf': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'Roboto', 'Helvetica Neue', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        .task-checkbox {
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid #007AFF;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .task-checkbox:checked {
+            background-color: #34C759;
+            border-color: #34C759;
+        }
+        
+        .task-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .task-completed {
+            text-decoration: line-through;
+            color: #8E8E93;
+            transition: all 0.3s ease;
+        }
+        
+        .task-item {
+            transition: all 0.2s ease;
+        }
+        
+        .task-item:hover {
+            background-color: rgba(0, 122, 255, 0.05);
+        }
+        
+        .add-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+        }
+        
+        .task-input:focus {
+            border-color: #007AFF;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-ios-bg font-sf min-h-screen">
+    <!-- @COMPONENT: TaskManagerApp -->
+    <div class="max-w-2xl mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <!-- @COMPONENT: AppHeader -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-semibold text-black mb-2">Tasks</h1>
+            <p class="text-completed-gray text-base">Simple task management for daily productivity</p>
+        </div>
+        <!-- @END_COMPONENT: AppHeader -->
+        
+        <!-- Add Task Section -->
+        <!-- @COMPONENT: AddTaskForm -->
+        <div class="bg-ios-white rounded-2xl shadow-sm mb-6 p-4">
+            <div class="flex gap-3">
+                <input 
+                    type="text" 
+                    placeholder="Add a new task..." 
+                    class="task-input flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:outline-none transition-all duration-200 text-black placeholder-completed-gray"
+                    data-bind="newTaskText"
+                    data-mock="true"
+                >
+                <button 
+                    class="add-button bg-ios-blue text-white px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:bg-blue-600 focus:outline-none focus:ring-3 focus:ring-blue-200"
+                    data-event="click:addTask"
+                    data-implementation="Should add new task to task list"
+                >
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: AddTaskForm -->
+        
+        <!-- Task Statistics -->
+        <!-- @COMPONENT: TaskStats -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="bg-ios-white rounded-2xl p-4 text-center shadow-sm">
+                <div class="text-2xl font-semibold text-ios-blue mb-1" data-bind="totalTasks">8</div>
+                <div class="text-sm text-completed-gray">Total Tasks</div>
+            </div>
+            <div class="bg-ios-white rounded-2xl p-4 text-center shadow-sm">
+                <div class="text-2xl font-semibold text-success-green mb-1" data-bind="completedTasks">3</div>
+                <div class="text-sm text-completed-gray">Completed</div>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: TaskStats -->
+        
+        <!-- Task List -->
+        <!-- @COMPONENT: TaskList -->
+        <div class="bg-ios-white rounded-2xl shadow-sm overflow-hidden">
+            <div class="p-4 border-b border-gray-100">
+                <h2 class="text-lg font-medium text-black flex items-center">
+                    <i class="fas fa-list-check text-ios-blue mr-2"></i>
+                    Your Tasks
+                </h2>
+            </div>
+            
+            <!-- Task Items Container -->
+            <div class="divide-y divide-gray-100">
+                <!-- @MAP: tasks.map(task => ( -->
+                
+                <!-- Pending Task Item -->
+                <!-- @COMPONENT: TaskItem [task, onToggle, onDelete] -->
+                <div class="task-item flex items-center p-4 group" data-mock="true">
+                    <input 
+                        type="checkbox" 
+                        class="task-checkbox mr-4 flex-shrink-0"
+                        data-event="change:toggleTask"
+                        data-bind="task.completed"
+                    >
+                    <span class="flex-1 text-black" data-bind="task.text">Review quarterly reports and analyze performance metrics</span>
+                    <button class="text-completed-gray hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-2" data-event="click:deleteTask">
+                        <i class="fas fa-trash-alt text-sm"></i>
+                    </button>
+                </div>
+                <!-- @END_COMPONENT: TaskItem -->
+                
+                <!-- Another Pending Task -->
+                <div class="task-item flex items-center p-4 group" data-mock="true">
+                    <input type="checkbox" class="task-checkbox mr-4 flex-shrink-0">
+                    <span class="flex-1 text-black">Schedule team meeting for project planning</span>
+                    <button class="text-completed-gray hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-2">
+                        <i class="fas fa-trash-alt text-sm"></i>
+                    </button>
+                </div>
+                
+                <!-- Completed Task Item -->
+                <div class="task-item flex items-center p-4 group" data-mock="true">
+                    <input type="checkbox" class="task-checkbox mr-4 flex-shrink-0" checked>
+                    <span class="flex-1 task-completed">Update portfolio website with recent projects</span>
+                    <button class="text-completed-gray hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-2">
+                        <i class="fas fa-trash-alt text-sm"></i>
+                    </button>
+                </div>
+                
+                <!-- Another Pending Task -->
+                <div class="task-item flex items-center p-4 group" data-mock="true">
+                    <input type="checkbox" class="task-checkbox mr-4 flex-shrink-0">
+                    <span class="flex-1 text-black">Buy groceries for the week</span>
+                    <button class="text-completed-gray hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-2">
+                        <i class="fas fa-trash-alt text-sm"></i>
+                    </button>
+                </div>
+                
+                <!-- Completed Task -->
+                <div class="task-item flex items-center p-4 group" data-mock="true">
+                    <input type="checkbox" class="task-checkbox mr-4 flex-shrink-0" checked>
+                    <span class="flex-1 task-completed">Call dentist to schedule appointment</span>
+                    <button class="text-completed-gray hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-2">
+                        <i class="fas fa-trash-alt text-sm"></i>
+                    </button>
+                </div>
+                
+                <!-- Another Pending Task -->
+                <div class="task-item flex items-center p-4 group" data-mock="true">
+                    <input type="checkbox" class="task-checkbox mr-4 flex-shrink-0">
+                    <span class="flex-1 text-black">Prepare presentation for client meeting</span>
+                    <button class="text-completed-gray hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-2">
+                        <i class="fas fa-trash-alt text-sm"></i>
+                    </button>
+                </div>
+                
+                <!-- Completed Task -->
+                <div class="task-item flex items-center p-4 group" data-mock="true">
+                    <input type="checkbox" class="task-checkbox mr-4 flex-shrink-0" checked>
+                    <span class="flex-1 task-completed">Read chapter 3 of marketing book</span>
+                    <button class="text-completed-gray hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-2">
+                        <i class="fas fa-trash-alt text-sm"></i>
+                    </button>
+                </div>
+                
+                <!-- Final Pending Task -->
+                <div class="task-item flex items-center p-4 group" data-mock="true">
+                    <input type="checkbox" class="task-checkbox mr-4 flex-shrink-0">
+                    <span class="flex-1 text-black">Organize desktop files and folders</span>
+                    <button class="text-completed-gray hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-2">
+                        <i class="fas fa-trash-alt text-sm"></i>
+                    </button>
+                </div>
+                
+                <!-- @END_MAP )) -->
+            </div>
+            
+            <!-- Empty State (Hidden when tasks exist) -->
+            <!-- @COMPONENT: EmptyState -->
+            <div class="p-8 text-center hidden" data-show-when="tasks.length === 0" data-mock="true">
+                <i class="fas fa-clipboard-list text-4xl text-completed-gray mb-4"></i>
+                <p class="text-completed-gray text-lg mb-2">No tasks yet</p>
+                <p class="text-completed-gray text-sm">Add your first task to get started!</p>
+            </div>
+            <!-- @END_COMPONENT: EmptyState -->
+        </div>
+        <!-- @END_COMPONENT: TaskList -->
+        
+        <!-- Quick Actions -->
+        <!-- @COMPONENT: QuickActions -->
+        <div class="mt-6 flex justify-center gap-4">
+            <button class="bg-ios-white text-completed-gray px-4 py-2 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors duration-200 shadow-sm" data-event="click:clearCompleted">
+                <i class="fas fa-broom mr-2"></i>
+                Clear Completed
+            </button>
+            <button class="bg-ios-white text-completed-gray px-4 py-2 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors duration-200 shadow-sm" data-event="click:markAllComplete">
+                <i class="fas fa-check-double mr-2"></i>
+                Complete All
+            </button>
+        </div>
+        <!-- @END_COMPONENT: QuickActions -->
+        
+        <!-- Footer -->
+        <div class="text-center mt-8 text-completed-gray text-sm">
+            <p>Stay organized, stay productive</p>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: TaskManagerApp -->
+    
+    <script>
+        // TODO: Implement business logic, API calls, and state management
+        
+        (function() {
+            // Checkbox interaction simulation
+            document.addEventListener('DOMContentLoaded', function() {
+                const checkboxes = document.querySelectorAll('.task-checkbox');
+                
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const taskText = this.parentElement.querySelector('span');
+                        if (this.checked) {
+                            taskText.classList.add('task-completed');
+                        } else {
+                            taskText.classList.remove('task-completed');
+                        }
+                        
+                        // TODO: Update task state in application store
+                        // TODO: Persist changes to backend/localStorage
+                        // TODO: Update task statistics
+                    });
+                });
+                
+                // Add task input handling
+                const addInput = document.querySelector('.task-input');
+                const addButton = document.querySelector('.add-button');
+                
+                function handleAddTask() {
+                    if (addInput.value.trim()) {
+                        // TODO: Create new task object
+                        // TODO: Add to task list
+                        // TODO: Clear input
+                        // TODO: Update statistics
+                        console.log('Adding task:', addInput.value);
+                        addInput.value = '';
+                    }
+                }
+                
+                addButton.addEventListener('click', handleAddTask);
+                addInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        handleAddTask();
+                    }
+                });
+                
+                // Delete task buttons
+                document.querySelectorAll('.fa-trash-alt').forEach(button => {
+                    button.parentElement.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        // TODO: Implement task deletion
+                        // TODO: Update statistics
+                        console.log('Deleting task');
+                    });
+                });
+                
+                // Quick actions
+                document.querySelector('[data-event="click:clearCompleted"]')?.addEventListener('click', function() {
+                    // TODO: Remove all completed tasks
+                    console.log('Clearing completed tasks');
+                });
+                
+                document.querySelector('[data-event="click:markAllComplete"]')?.addEventListener('click', function() {
+                    // TODO: Mark all tasks as completed
+                    console.log('Marking all tasks complete');
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
