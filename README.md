@@ -47,7 +47,7 @@ The app will start on [http://localhost:5173](http://localhost:5173).
 
 ## 📸 Screenshots
 
-<img src="assets/screenshot.png" width="600" alt="Tasko Screenshot">
+///<img src="assets/screenshot.png" width="600" alt="Tasko Screenshot">
 
 ---
 
