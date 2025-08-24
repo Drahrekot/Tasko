@@ -15,9 +15,9 @@ Lightweight, clean, and focused — just you and your tasks.
 ---
 
 ## 📸 Screenshots
-*(Add your screenshots here!)*  
-Example:  
-<img src="assets/screenshot1.png" width="600" alt="Tasko Screenshot">
+<!-- *(Add your screenshots here!)*   -->
+<!-- Example:   -->
+<!-- <img src="assets/screenshot1.png" width="600" alt="Tasko Screenshot"> -->
 
 ---
 
