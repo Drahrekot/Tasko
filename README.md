@@ -1,7 +1,5 @@
 # ✅ Tasko
 
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-![Made with Love](https://img.shields.io/badge/Made%20with-%E2%9D%A4-red.svg)
 ![Status](https://img.shields.io/badge/Status-Active-success.svg)
 
 **Tasko** is a minimalist task management app built to help you focus on what matters.  
