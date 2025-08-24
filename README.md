@@ -46,15 +46,8 @@ The app will start on [http://localhost:5173](http://localhost:5173).
 ---
 
 ## 📸 Screenshots
-*(Add screenshots of your app UI here to make it look polished!)*  
-Example:  
+
 <img src="assets/screenshot.png" width="600" alt="Tasko Screenshot">
-
----
-
-## 🎨 Design Philosophy
-> *“Simplicity is the ultimate sophistication.”*  
-Tasko is built with a focus on **minimalism and clarity** — no clutter, no complexity, just tasks.
 
 ---
 
